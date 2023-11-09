@@ -1,0 +1,56 @@
+[
+  {
+    "id": "[PT]bacalao",
+    "name": "Bacalao",
+    "country": {
+      "code": "PT",
+      "name": "Portugal"
+    },
+    "type": "SEAFOOD"
+  },
+  {
+    "id": "[PT]pasteis-de-nata",
+    "name": "Pasteis de nata",
+    "country": {
+      "code": "PT",
+      "name": "Portugal"
+    },
+    "type": "SWEET"
+  },
+  {
+    "id": "[PT]caldo-verde",
+    "name": "Caldo verde",
+    "country": {
+      "code": "PT",
+      "name": "Portugal"
+    },
+    "type": "VEGETARIAN"
+  },
+  {
+    "id": "[ES]chorizo",
+    "name": "Chorizo",
+    "country": {
+      "code": "ES",
+      "name": "Spain"
+    },
+    "type": "MEAT"
+  },
+  {
+    "id": "[ES]gazpacho",
+    "name": "Gazpacho",
+    "country": {
+      "code": "ES",
+      "name": "Spain"
+    },
+    "type": "VEGETARIAN"
+  },
+  {
+    "id": "[ES]paella-de-marisco",
+    "name": "Paella de marisco",
+    "country": {
+      "code": "ES",
+      "name": "Spain"
+    },
+    "type": "SEAFOOD"
+  }
+]

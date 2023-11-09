@@ -1,0 +1,78 @@
+---
+import DISH_LIST from '../../assets/dish.json';
+
+type Props = {
+  scratched: string[];
+};
+
+const { scratched } = Astro.props as Props;
+
+const scratchedIds = DISH_LIST.filter((dish) => scratched.includes(dish.name));
+
+const rawStylesCSS = `${scratchedIds
+  .map((dish) => `svg [id='${dish.id}']`)
+  .join(', ')} {
+    opacity: 1;
+  }`;
+
+const { default: rawHtml } = await import(`../../assets/map.svg?raw`);
+const svgMap = rawHtml
+  .replace(/width="[^"]+"/, 'width="100%"')
+  .replace(/height="[^"]+"/, 'height="100%"');
+---
+
+<div class="w-full" id="map">
+  <div class="zoomist-container">
+    <div class="zoomist-wrapper">
+      <div class="zoomist-image">
+        <Fragment set:html={svgMap} />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add event on click for each country -->
+<script>
+  import { mapToDish } from '../helpers/map-to-dish';
+
+  const elements = document.querySelectorAll("[id^='[']");
+
+  elements.forEach((elem) => {
+    // const wrapper = document.createElement('a');
+    // wrapper.href = 'https://en.wikipedia.org/wiki/Bullseye_(target)';
+    // wrap(elem, wrapper);
+    console.log(elem);
+    const { name } = mapToDish(elem.id);
+    const url = encodeURI(`/dish/${name}`);
+    elem.addEventListener('click', () => window.location.assign(url));
+  });
+</script>
+
+<script>
+  import 'zoomist/css';
+  import Zoomist from 'zoomist';
+
+  new Zoomist('.zoomist-container', {
+    maxScale: 4,
+    zoomer: true,
+  });
+</script>
+
+<!-- Wee need the global in order to avoid Astro from changing the name of the class  -->
+<style is:global>
+  svg .zoomist-image {
+    @apply bg-slate-200;
+  }
+
+  svg [id^='['] {
+    opacity: 0;
+  }
+
+  svg [id^='[']:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+</style>
+
+<!-- Apply the change of color to the dish names  -->
+<style is:global set:html={rawStylesCSS}></style>

@@ -1,0 +1,40 @@
+---
+import type { Country } from 'country-list';
+import type { Dish } from '../helpers/types';
+import { humanize } from '../helpers/humanize';
+import { getDishTypes } from '../helpers/get-dish-types';
+import { TYPE_COLOR_MAP } from '../scripts/extract-dishes';
+
+type Props = {
+  country: Country;
+  dishes: Dish[];
+  scratched: string[];
+};
+
+const { country, dishes, scratched } = Astro.props as Props;
+
+const dishTypes = getDishTypes(dishes);
+---
+
+<li class="text-white">
+  <div class="flex space-x-1 items-center">
+    <h3 class="text-xl">{country.name}</h3>
+    {
+      dishTypes.map((type) => (
+        <div
+          class="w-4 h-4 rounded-full"
+          style={`background: ${TYPE_COLOR_MAP[type]};`}
+        />
+      ))
+    }
+  </div>
+  <ol class="list-decimal flex flex-col ml-6">
+    {
+      dishes.map((dish) => (
+        <li class={`${scratched.includes(dish.name) ? 'line-through' : ''}`}>
+          {humanize(dish.name)}
+        </li>
+      ))
+    }
+  </ol>
+</li>

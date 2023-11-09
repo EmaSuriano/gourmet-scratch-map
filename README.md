@@ -1,4 +1,40 @@
-# Astro Starter Kit: Basics
+# Gourmet Scratch Map
+
+> Open Source Map based on [Gourmet Scratch Map](https://drop.com/buy/luckies-of-london-gourmet-scratch-map) from [Luckies of London](https://luckies.co.uk/)
+
+## Motivation
+
+The [original website](https://www.gourmetscratchmap.com/) is now out of order, there is no way that now the holders of this map can actually access the content that used to be there.
+
+Therefore I decided to create my own version of it while testing new tools on the way.
+
+## Tech stack
+
+- [Astro](https://astro.build/): for web framework
+
+## How was this project created?
+
+I found a relative good picture of the map while searching the web:
+
+![Preview of the map](http://cdn.notonthehighstreet.com/system/product_images/images/001/330/651/original_gourmet-scratch-map.jpg)
+
+The main issue with the image is that the resolution is quite low: 900x900 (199 KB) ... Which is going to look quite bad when being used in a large screen, or even when zooming.
+
+That's where AI comes into play! I used the [upscale](https://www.upscale.media/) service by [PixelBin.io](https://www.pixelbin.io/), where I managed to increase the image resolution by 4 times! Having as a result an image with dimensions of 3441 × 3445 (6,8 MB) 🚀
+
+![Scaled map](https://github.com/EmaSuriano/gourmet-scratch-map/assets/3399429/92fa048c-9762-47fd-8ba1-aea41079e82a)
+
+But obviously serving an image of almost 7 MB is not the best in terms of performance for the web, and also in case the user would like to interact with each of the segment of the map I had to manually select the parts of the image, which is going to be quite a challenging and painful process.
+
+One of the most performance type of assets in the web is indeed `SVG`, it allows to have almost infinite scrolling and reduce the assets size drastically. I searched online for a tool that can convert my `JPEG` file to `SVG`, and I found out that [convert.io](https://convertio.co) worked the best in my case. The only caveat about the process is that my image ended up loosing the colors, but this is not a problem for my use case.
+
+The result is a sharp SVG that can be expanded until what the browser needs and it will never show definition on the process (because of the usage of vectors). On top of that now the asset only takes 600 KB, which is a reduction of around 91% 🤯
+
+![SVG convertion](https://github.com/EmaSuriano/gourmet-scratch-map/assets/3399429/63417682-3bb8-4f5f-991d-ba00a146bcf8)
+
+Once I have the map in `SVG`, I need a way to define which part of the map matches with each dish. Obviously the image doesn't contain this information, and each dish has a different shape and size than others. The only way for this step is to do it manually. So let's jump into the `SVG` world of Figma and start adding those layers.
+
+## Setup
 
 ```
 npm create astro@latest -- --template basics

@@ -1,0 +1,20 @@
+---
+import type { Dish } from '../helpers/types';
+import { humanize } from '../helpers/humanize';
+import { TYPE_COLOR_MAP } from '../scripts/extract-dishes';
+
+type Props = {
+  type: Dish['type'];
+};
+
+const { type } = Astro.props as Props;
+---
+
+<li class="text-white flex space-x-2 items-center">
+  <div
+    class="w-5 h-5 rounded-full"
+    style={`background: ${TYPE_COLOR_MAP[type]};`}
+  >
+  </div>
+  <h3 class="text-2xl">{humanize(type.toLowerCase())}</h3>
+</li>

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "[PT] bacalao",
+    "label": "Bacalao",
+    "countryCode": "PT",
+    "countryName": "Portugal"
+  },
+  {
+    "id": "[PT] pasteis de nata",
+    "label": "Pasteis de nata",
+    "countryCode": "PT",
+    "countryName": "Portugal"
+  },
+  {
+    "id": "[PT] caldo verde",
+    "label": "Caldo verde",
+    "countryCode": "PT",
+    "countryName": "Portugal"
+  }
+]
